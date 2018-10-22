@@ -38,9 +38,19 @@ function randomTurn(callsign) {
 }
 
 
-function randomClearance(callsign) {
-    const altitudeHundreds = Math.round(3 + Math.random() * 15);
+function randomTaxi(callsign) {
+    const controller = "Krymsk Control";
+    const taxiways = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "a2", "a3", "b2", "b3"];
 
+    const taxiWaysToUse = _.sampleSize(taxiways, _.random(1, 4)).map(stringToNatoSpelling).join(", ");
+
+    const runway = _.random(1, 36);
+
+    return doSay(`${callsign}, ${controller}. Cleared for taxi via ${taxiWaysToUse}. Hold short runway ${numberToNatoSpelling(runway, 2)}.`);
+}
+
+
+function randomClearance(callsign) {
     const area = _.sample([["Krymsk tower", "Krymsk Control"], ["Al Dhafra tower", "Al Dhafra control"], ["Kobuletti tower", "Kobuletti control"], ["Anapa tower", "Anapa control"]]);
     const tower = area[0];
     const controller = area[1];
@@ -52,8 +62,7 @@ function randomClearance(callsign) {
 
     const greeting = Math.random() > 0.5 ? "Good morning!" : "";
 
-    let clearance = `${callsign}, ${tower}. You are cleared as filed, exit ${exit}. After take-off maintain ${altitudeHundredsFeet(initialAltitudeHundreds)}, expect angels ${numberToNatoSpelling(angels)}. After departure switch to frequency ${numberToNatoSpelling(controlFreq, 0, 2)} for ${controller}. ${greeting}`;
-    //Air Canada 301, Los Angeles Clearance Delivery. Cleared to the Calgary International Airport via the Gorman Four Departure, Shafter Transition, then as filed. Maintain 5000, Expect Flight Level Three Four Zero - five minutes after departure. Departure Frequency 124.30
+    let clearance = `${callsign}, ${tower}. You are cleared as filed, exit ${exit}. Maintain ${altitudeHundredsFeet(initialAltitudeHundreds)}, expect angels ${numberToNatoSpelling(angels)}. After departure switch to frequency ${numberToNatoSpelling(controlFreq, 0, 2)} for ${controller}. ${greeting}`;
 
     return doSay(clearance);
 }

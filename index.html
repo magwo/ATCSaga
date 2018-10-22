@@ -31,8 +31,9 @@
       <h3>Practice your ATC skills without all that embarrasment ':)</h3>
 
 
-      <button onclick="addHistoryLine(randomTurn(window.callSign))">Random turn</button>
       <button onclick="addHistoryLine(randomClearance(window.callSign))">Random clearance</button>
+      <button onclick="addHistoryLine(randomTaxi(window.callSign))">Random taxi</button>
+      <button onclick="addHistoryLine(randomTurn(window.callSign))">Random turn</button>
       <button onclick="simpleRecognition(function(str, conf) { addHistoryLine('You spoke: ' + str) })">PTT</button>
 
       <p id="history">
