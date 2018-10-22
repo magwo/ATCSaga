@@ -1,42 +1,44 @@
 <!DOCTYPE html>
-<meta charset="UTF-8">
-<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 
-<link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 
-<script src="lodash.js"></script>
+    <script src="lodash.js"></script>
 
-<script src="polyfill.js"></script>
-<script src="speech.js"></script>
-<script src="recognition.js"></script>
-<script src="main.js"></script>
+    <script src="polyfill.js"></script>
+    <script src="speech.js"></script>
+    <script src="recognition.js"></script>
+    <script src="main.js"></script>
 
-<script>
+    <script>
 
-window.callSign = "Enfield 1 1";
+    window.callSign = "Enfield 1 1";
 
-function addHistoryLine(str) {
-  document.getElementById("history").innerHTML += str + "<br>";
-}
-
-
-</script>
-
+    function addHistoryLine(str) {
+      document.getElementById("history").innerHTML += str + "<br>";
+    }
 
 
-<body>
-  <div id="container">
-    <h1>ATC Saga</h1>
-    <h3>Train your ATC skills without all that embarrasment ':)</h3>
+    </script>
+  </head>
+
+  <body>
+    <div id="container">
+      <h1>ATC Saga</h1>
+      <h3>Practice your ATC skills without all that embarrasment ':)</h3>
 
 
-    <button onclick="addHistoryLine(randomTurn(window.callSign))">Random turn</button>
-    <button onclick="addHistoryLine(randomClearance(window.callSign))">Random clearance</button>
-    <button onclick="simpleRecognition(function(str, conf) { addHistoryLine('You spoke: ' + str) })">PTT</button>
+      <button onclick="addHistoryLine(randomTurn(window.callSign))">Random turn</button>
+      <button onclick="addHistoryLine(randomClearance(window.callSign))">Random clearance</button>
+      <button onclick="simpleRecognition(function(str, conf) { addHistoryLine('You spoke: ' + str) })">PTT</button>
 
-    <p id="history">
+      <p id="history">
 
-    </p>
+      </p>
 
-  </div>
-</body>
+    </div>
+  </body>
+</html>
