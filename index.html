@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 
     <script src="lodash.js"></script>
+    <script src="numeral.min.js"></script>
 
     <script src="polyfill.js"></script>
     <script src="speech.js"></script>
@@ -17,8 +18,20 @@
 
     window.callSign = "Enfield 1 1";
 
-    function addHistoryLine(str) {
-      document.getElementById("history").innerHTML += str + "<br>";
+    function newAtcItem(atcItem) {
+      console.log("ATC", atcItem);
+      document.getElementById("instruction-text").innerHTML = atcItem.text;
+      document.getElementById("instruction-spoken").innerHTML = atcItem.speech;
+      document.getElementById("expected-readback").innerHTML = atcItem.expectedReadback;
+    }
+
+    function toggleExpansion(el) {
+      el = el.parentNode;
+      if (el.classList.contains("closed")) {
+        el.classList.remove("closed");
+      } else {
+        el.classList.add("closed");
+      }
     }
 
 
@@ -27,18 +40,49 @@
 
   <body>
     <div id="container">
-      <h1>ATC Saga</h1>
-      <h3>Practice your ATC skills without all that embarrasment ':)</h3>
+      <h1>ATC readback practice</h1>
 
+      <!-- <section>
+        <select onchange="console.log(this.value)">
+          <option value="foo">Foo</option>
+        </select>
+      </section> -->
 
-      <button onclick="addHistoryLine(randomClearance(window.callSign))">Random clearance</button>
-      <button onclick="addHistoryLine(randomTaxi(window.callSign))">Random taxi</button>
-      <button onclick="addHistoryLine(randomTurn(window.callSign))">Random turn</button>
-      <button onclick="simpleRecognition(function(str, conf) { addHistoryLine('You spoke: ' + str) })">PTT</button>
+      <section>
+        <button onclick="newAtcItem(doSay(randomClearance(window.callSign)))">Random clearance</button>
+        <button onclick="newAtcItem(doSay(randomTaxi(window.callSign)))">Random taxi</button>
+        <button onclick="newAtcItem(doSay(randomTurn(window.callSign)))">Random turn</button>
+        <button onclick="simpleRecognition(function(str, conf) { newAtcItem('You spoke: ' + str) })">PTT</button>
 
-      <p id="history">
+      </section>
 
-      </p>
+      <section>
+        <div id="history">
+
+        </div>
+
+        <span class="expandable-container">
+          <div class="expandable closed greenish">
+            <div class="expandable-header" onclick="toggleExpansion(this)"><p>Instruction &#9660;</p></div>
+            <div class="expandable-body" id="instruction-text" ></div>
+          </div>
+        </span>
+
+        <span class="expandable-container">
+          <div class="expandable closed yellowish">
+            <div class="expandable-header" onclick="toggleExpansion(this)"><p>Instruction (as spoken) &#9660;</p></div>
+            <div class="expandable-body" id="instruction-spoken" ></div>
+          </div>
+        </span>
+
+        <span class="expandable-container">
+          <div class="expandable closed purplish">
+            <div class="expandable-header" onclick="toggleExpansion(this)"><p>Expected readback &#9660;</p></div>
+            <div class="expandable-body" id="expected-readback"></div>
+          </div>
+        </span>
+
+      </section>
 
     </div>
   </body>

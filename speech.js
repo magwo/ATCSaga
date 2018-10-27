@@ -8,7 +8,7 @@ const digitToNormalSpell = [
 ];
 
 const letterToNatoSpell = {
-    0: 'zero', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine',
+    0: 'zero', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'niner',
     "-": "dash", ",": "comma", ".": "decimal",
     a: "alpha", b: "bravo", c: "charlie",
     d: "delta", e: "echo", f: "foxtrot",
@@ -23,6 +23,7 @@ const letterToNatoSpell = {
 
 
 function stringToNatoSpelling(str) {
+    str = str.toLowerCase();
     let result = "";
     // Actual numbers
     for(let i=0; i<str.length; i++) {
@@ -33,40 +34,12 @@ function stringToNatoSpelling(str) {
     return result.trim();
 }
 
-function numberToNatoSpelling(number, minDigits, minDecimals) {
-    const str = number.toString();
-    console.log("str is ", str);
-    minDigits = minDigits || 0;
-    const parsed = str.match(/^(\d+)[.,]?(\d*?)$/);
-    console.log("parsed", parsed);
-    const integerStr = parsed[1];
-    const decimalStr = parsed[2];
-    console.log(integerStr);
-    let result = "";
-
-    // Padding
-    for(let i=0; i + integerStr.length < minDigits; i++) {
-        result += digitToNatoSpell[0] + " ";
-    }
-
-    result += stringToNatoSpelling(str);
-
-    // if(decimalStr) {
-    //     // Padding
-    //     for(let i=0; i + decimalStr.length < minDecimals; i++) {
-    //         result += digitToNatoSpell[0] + " ";
-    //     }
-    // }
-
-    return result.trim();
-}
-
 
 function altitudeHundredsFeet(hundredsOfFeet) {
     let str = "";
 
     if(hundredsOfFeet >= 10) {
-        str += `${digitToNormalSpell[Math.round(hundredsOfFeet / 10)]} thousand `;
+        str += `${digitToNormalSpell[Math.floor(hundredsOfFeet / 10)]} thousand `;
     }
 
     if(hundredsOfFeet % 10 !== 0) {
@@ -94,4 +67,3 @@ function doSay(txt) {
 
     synth.speak(utterThis);
 }
-

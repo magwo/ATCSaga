@@ -19,15 +19,85 @@ body {
     margin: 0 auto;
 }
 
+section {
+  margin: 12px 0;
+}
+
+select {
+  font-size: 16px;
+}
 
 button {
     border: none;
     border-radius: 5px;
     outline: none;
+    cursor: pointer;
 
     height: 40px;
     font-size: 14px;
     padding: 12px 12px;
-    background-color: #777;
+    background-color: #666;
     color: #fff;
+}
+
+button:hover {
+  background-color: #777;
+}
+
+button:active {
+  background-color: #555;
+}
+
+.greenish {
+  background-color: #cfc;
+}
+
+.yellowish {
+  background-color: #eec;
+}
+
+.purplish {
+  background-color: #ccf;
+}
+
+.expandable-container {
+  display: inline-flex;
+  width: 100%;
+  justify-content: flex-start;
+  margin: 12px 0;
+}
+
+.expandable {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 5px;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.expandable .expandable-header {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0 12px;
+}
+
+.expandable .expandable-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0 12px;
+  height: 120px;
+  overflow-y: auto;
+  transition: height 200ms;
+}
+
+.expandable.closed .expandable-body {
+  height: 0;
+  overflow-y: hidden;
 }
