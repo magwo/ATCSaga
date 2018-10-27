@@ -52,7 +52,7 @@
         <button onclick="newAtcItem(doSay(randomClearance(window.callSign)))">Random clearance</button>
         <button onclick="newAtcItem(doSay(randomTaxi(window.callSign)))">Random taxi</button>
         <button onclick="newAtcItem(doSay(randomTurn(window.callSign)))">Random turn</button>
-        <button onclick="simpleRecognition(function(str, conf) { newAtcItem('You spoke: ' + str) })">PTT</button>
+        <!-- <button onclick="simpleRecognition(function(str, conf) { newAtcItem('You spoke: ' + str) })">PTT</button> -->
 
       </section>
 
@@ -85,5 +85,15 @@
       </section>
 
     </div>
+
+    <script>
+      try {
+        doSay({text: "", speech: "", expectedReadback: ""})
+      } catch {}
+
+      setTimeout(function() {
+        doSay({text: "", speech: "Welcome to ATC read-back practice", expectedReadback: ""})
+      }, 300);
+    </script>
   </body>
 </html>
